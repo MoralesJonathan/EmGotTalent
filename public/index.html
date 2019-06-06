@@ -1,0 +1,125 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>EM's Got Talent '19</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
+	<link href='hero.css' rel='stylesheet' type='text/css'>
+	<link href='style.css' rel='stylesheet' type='text/css'>
+	<link href='stars.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+	<hero>
+		<nav>
+			<ul>
+				<div class="leftMenu">
+					<li><a id="home" class="active" href="#home">Home</a></li>
+				</div>
+				<div class="rightMenu">
+					<li><a href="#about">About</a></li>
+					<li><a href="#gallery">Gallery</a></li>
+					<li><a href="#submit">Submit</a></li>
+				</div>
+			</ul>
+		</nav>
+		<div id='stars' class="stars"></div>
+		<div id='stars2' class="stars"></div>
+		<div id='stars3' class="stars"></div>
+		<div class="horizon"></div>
+		<section class="grid-container">
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+			<div class="grid-line"></div>
+		</section>
+		<div id="parallax">
+			<img class="svg" src="triangle.svg" data-depth="0.1">
+			<div id='title' data-depth="0.2">
+				<p class="pinkTitle">
+					2019
+				</p>
+				<br>
+				<p class="wordArt">
+					EVERYMUNDO'S
+				</p>
+				<div id="glitchyTitle">
+					<div class="glitchyTitle-title"></div>
+					<div class="glitchyTitle-title glitchyTitle-color glitchyTitle-a"></div>
+					<div class="glitchyTitle-title glitchyTitle-color glitchyTitle-b"></div>
+				</div>
+			</div>
+		</div>
+	</hero>
+	<section id="about">
+		<h1>&nbsp;ABOUT THE COMPETITION&nbsp;</h1>
+		<div class="container">
+			<div class="row">
+				<p>Welcome to the third annual EveryMundo’s Got Talent competition! This year's showcase will take place
+					on <strong>Friday, July 12th</strong>. Here all Mundos are welcome to show us what hidden talents
+					they’ve been waiting to show off. For the top 3 places in the competition there will be rewarding
+					prizes!</p>
+				<ul>
+					<li>1st place: Lunch with the company card!</li>
+					<li>2nd place: Some cashews from the company room</li>
+					<li>3rd place: Your very own mug from the kitchen</li>
+				</ul>
+				<p>EveryMundo’s Got Talent was founded 97 years ago on the foundation that we know every man, woman,
+					child, and animal has talent. We here at EveryMundo’s Got Talent wanted to give the people a chance
+					to express their talents to all the Mundos out there, and even earn a chance to win a compelling
+					prize for their effort.</p>
+			</div>
+		</div>
+		</div>
+	</section>
+	<section id="gallery">
+		<h1>&nbsp;VIEW THE SUBMISSIONS&nbsp;</h1>
+		<div class="container">
+			<div class="row">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo ante a fringilla ultrices.
+					Proin ac erat rutrum, porttitor odio in, euismod sem. Sed et posuere dolor, nec tincidunt diam.
+					Nulla faucibus accumsan nisl ac porttitor. Maecenas ut nulla sagittis nibh vehicula commodo at in
+					augue. Aenean lobortis libero felis, in accumsan justo pretium ac.</p>
+				<br>
+				<div class="flex-grid videos">
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<section id="submit">
+		<h1>&nbsp;ENTER HERE&nbsp;</h1>
+		<div class="container">
+			<div class="row">
+				<p>To upload a submission, use your EveryMundo Gmail account to upload a YouTube video. Then, link the
+					URL in the text box below.</p>
+				<p>The deadline to submit a video is <strong>June 30th at Midnight</strong>. Any submission received
+					thereafter will not be considered.</p>
+			</div>
+			<div clss="row">
+				<form id="urlForm">
+					<input type="url" name="url" class="input" />
+					<button type="submit" class="btn upload">Submit</button>
+				</form>
+			</div>
+			<div clss="row">
+				<p id="confirmationMessage"></p>
+			</div>
+		</div>
+	</section>
+	<script src="gallery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+	<script src="parallax.js"></script>
+	<script src="wordGlitch.js"></script>
+	<script src="submit.js"></script>
+</body>
+
+</html>

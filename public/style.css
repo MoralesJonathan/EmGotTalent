@@ -1,0 +1,146 @@
+@import url("https://matiaslescano.com.ar/static/fonts/pixelicious.css");
+
+html {
+  height: 100%;
+  background: black;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+html::-webkit-scrollbar-track {
+  background: black;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+  background-color: black;
+}
+
+html::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #0b0016 2%, #40005e 38%, #40005e 38%, #002956 66%, #000711 98%);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+body {
+  margin: 0;
+}
+
+
+#about, #gallery, #submit {
+  background-color: #010102;
+  background-image: url("stripes.png");
+  color: white;
+  position: relative;
+  width: 75vw;
+  min-height: 400px;
+  top: calc(100vh + 100px);
+  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: #3efeff solid 2px;
+  border-bottom: #3efeff solid 2px;
+  border-right: #3efeff solid 2px;
+}
+
+#about .container, #gallery .container, #submit .container {
+  padding: 5%;
+}
+
+#about h1, #gallery h1, #submit h1 {
+  margin-top: 0px;
+  display: table;
+  white-space: nowrap;
+  font-family: Pixelicious, monospace;
+  animation: 2s ease-in-out infinite alternate pulse;
+  -webkit-animation: 2s ease-in-out infinite alternate pulse;
+  font-size: 2em;
+  position: absolute;
+  top: -40px;
+}
+
+#about h1:before, #gallery h1:before, #submit h1:before, #about h1:after, #gallery h1:after, #submit h1:after {
+  border-top: 2px solid #3efeff;
+  content: '';
+  display: table-cell;
+  position: relative;
+  top: 1.2em;
+}
+
+#about h1:before, #gallery h1:before, #submit h1:before {
+  width: 10%;
+}
+
+#about h1:after, #gallery h1:after, #submit h1:after {
+  width: 100%;
+}
+
+#about p, #gallery p, #submit p {
+  font-family: Pixelicious, monospace;
+  font-size: 1em;
+}
+
+#about li, #gallery li, #submit li {
+  font-family: Pixelicious, monospace;
+  font-size: 0.9em;
+}
+
+.btn {
+  border-bottom: 6px inset rgba(0, 0, 0, 0.5);
+  border-left: 6px inset rgba(0, 0, 0, 0.5);
+  border-right: 6px inset rgba(255, 255, 255, 0.5);
+  border-top: 6px inset rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5em;
+  min-width: 150px;
+  padding: .2em;
+  text-transform: uppercase;
+  font-family: monospace;
+  width: auto;
+}
+
+.btn.upload {
+  background: #29b8b8;
+}
+
+.btn.upload:focus, .btn.upload:hover {
+  background: #3efeff;
+}
+
+.input {
+  width: 300px;
+  margin-right: 25px;
+}
+
+.flex-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.col {
+  width: 25%;
+  margin: 25px 0;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: rgba(255, 255, 255, 0.9) -0.06em -0.06em, rgba(67, 144, 126, 0.9) 0 0;
+  }
+  33% {
+    text-shadow: rgba(204, 255, 252, 0.9) -0.15em -0.15em, rgba(157, 94, 186, 0.9) 0 0;
+  }
+  66% {
+    text-shadow: rgba(229, 255, 254, 0.9) -0.06em -0.06em, rgba(157, 94, 186, 0.9) 0 0;
+  }
+  100% {
+    text-shadow: rgba(179, 255, 251, 0.9) -0.15em -0.15em, rgba(202, 69, 215, 0.9) 0 0;
+  }
+}
