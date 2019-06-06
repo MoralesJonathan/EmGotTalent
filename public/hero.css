@@ -57,8 +57,24 @@ hero {
     margin-right: auto;
     padding-top: auto;
     padding-bottom: auto;
-    height: 60%;
-    margin-top: 10%;
+    height: 70%;
+    margin-top: 70px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    img.svg {
+      width: 100%;
+      height: initial;
+    }
+    #parallax {
+      top: 40%!important;
+      position: absolute!important;
+      transform: translatey(-50%);
+      -webkit-transform: translatey(-50%);
+      -moz-transform: translatey(-50%);
+      -ms-transform: translatey(-50%);
+      -o-transform: translatey(-50%);
+}
   }
   
   #title {
@@ -155,10 +171,17 @@ hero {
     opacity: .4;
   }
   
+  #parallax {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    left: 0;
+    overflow: hidden;
+  }
 
 .grid-container {
-    position: absolute;
-    width: 200%;
+    position: sticky;
+    width: 100%;
     height: 100vh;
     bottom: 0;
     left: -50%;
@@ -197,6 +220,13 @@ hero {
     box-shadow: 0px 0px 25px 10px rgb(255, 184, 255);
     animation: .1s linear infinite alternate pulseGlow;
     -webkit-animation: .1s linear infinite alternate pulseGlow;
+  }
+
+
+  @media only screen and (max-width: 1000px) {
+    .horizon:before {
+      bottom: -1%;
+    }
   }
   
   .grid-line {
