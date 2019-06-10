@@ -1,2 +1,3 @@
 const scene = document.getElementById('parallax');
-const parallaxInstance = new Parallax(scene);
+const width = Math.max(document.documentElement.clientWidth, window.innerWidth);
+let parallaxInstance = window.mobilecheck || width < 1000? null: new Parallax(scene);
