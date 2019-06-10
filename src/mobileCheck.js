@@ -1,3 +1,7 @@
+window.apiKeys = {
+    getNewKeys : null,
+    keys : null
+};
 window.mobilecheck = (function () {
     let check = false;
     window.apiKeys.keys = ['fHi7wfBOTAE9746n2BT8abando286tbO', 'YfgaiufIADSbuyrv7a71969w9A9NSDB61','BATDQ86INBTbfiq6tFQFtOFTOAG0b87sdfq'];

@@ -9,7 +9,7 @@ const express = require("express"),
 require('dotenv').config();
 server.use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json())
-    .use(express.static("public/"))
+    .use(express.static("dist/"))
     .set('trust proxy', 1);
 
 const submitLimiter = rateLimit({

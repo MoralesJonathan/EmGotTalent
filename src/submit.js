@@ -10,7 +10,7 @@ processForm = e => {
             const keys = window.apiKeys.keys;
             xhr.open('POST', '/submit', true);
             xhr.setRequestHeader("Content-type", "application/json");
-            xhr.send(JSON.stringify({ url, keys, cachecode: JSON.parse(xhr1.responseText).code}));
+            xhr.send(JSON.stringify({ url, key: keys[1], cachecode: JSON.parse(xhr1.responseText).code}));
             xhr.onreadystatechange = () => {
                 const regex = new RegExp('^2\\d{2}$');
                 if (xhr.readyState === 4 && regex.test(xhr.status)) {
