@@ -12,7 +12,7 @@ processForm = e => {
             document.getElementById("confirmationMessage").innerHTML = "You submission was received! Be sure to stay tuned for something awesome!";
             form.parentNode.removeChild(form);
         } else if (!regex.test(xhr.status)) {
-            document.getElementById("confirmationMessage").innerHTML = "Sorry, submission no bueno :(";
+            document.getElementById("confirmationMessage").innerHTML = `Sorry, your submission did not go through: ${xhr.responseText}`;
         }
     };
     return false;
