@@ -1,13 +1,11 @@
-const ua = window.navigator.userAgent;
-const msie = ua.indexOf("MSIE ");
-let ie = false;
+var ua = window.navigator.userAgent;
+var msie = ua.indexOf("MSIE ");
+var ie = false;
 if (msie > 0) {
-    // IE 10 or older => return version number
     ie = true;
 }
-const trident = ua.indexOf('Trident/');
+var trident = ua.indexOf('Trident/');
 if (trident > 0) {
-    // IE 11 => return version number
     ie = true;
 }
 var edge = ua.indexOf('Edge/');
