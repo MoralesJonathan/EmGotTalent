@@ -25,10 +25,13 @@ html::-webkit-scrollbar-thumb {
   -o-border-radius: 10px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
 }
-
 
 #about, #gallery, #submit {
   background-color: #010102;
