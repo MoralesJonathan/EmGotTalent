@@ -33,6 +33,22 @@ body {
   margin: 0;
 }
 
+section a:link {
+  color: #3EFEFF;
+}
+
+section a:visited {
+  color: #8E1DE3;
+}
+
+section a:hover {
+  color: rgb(136, 255, 255);
+}
+
+section a:active {
+  color: rgb(125, 4, 218);
+}
+
 #about, #gallery, #submit {
   background-color: #010102;
   background-image: url("stripes.png");
@@ -154,3 +170,4 @@ body {
     text-shadow: rgba(179, 255, 251, 0.9) -0.15em -0.15em, rgba(202, 69, 215, 0.9) 0 0;
   }
 }
+
