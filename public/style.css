@@ -110,12 +110,14 @@ body {
 }
 
 .btn.upload:focus, .btn.upload:hover {
-  background: #3efeff;
+  background: #05d8d8;
 }
 
 .input {
   width: 300px;
   margin-right: 25px;
+  font-size: 1em;
+  padding: .2em
 }
 
 .flex-grid {
@@ -128,6 +130,12 @@ body {
   width: 25%;
   margin: 25px 0;
 }
+@media only screen and (max-width: 1000px) {
+  .col {
+    width: 50%;
+  }
+}
+
 
 @keyframes pulse {
   0% {
