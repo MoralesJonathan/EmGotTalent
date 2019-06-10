@@ -12,5 +12,16 @@ entry: glob.sync("./src/*.js"),
 	new JavaScriptObfuscator ({
       rotateUnicodeArray: true
   })
-]
+],
+module: {
+    rules: [
+        {
+            test: /\.js$/,
+            loader: 'babel-loader',
+            query: {
+                presets: ['@babel/preset-env']
+            }
+        }
+    ]
+}
 };
