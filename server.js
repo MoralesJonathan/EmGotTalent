@@ -6,6 +6,7 @@ const express = require("express"),
     { MongoClient } = require("mongodb"),
     dbName = 'heroku_5nkbvc09',
     client = new MongoClient(process.env.MONGODB_URI);
+require('dotenv').config();
 server.use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json())
     .use(express.static("public/"))
@@ -17,7 +18,32 @@ const submitLimiter = rateLimit({
     message: "You're attempting to submit too many videos. Please try again at a later time."
 });
 
+
+const jwt = require('jsonwebtoken');
+
+const checkToken = (req, res, next) => {
+    let token = req.body.cachecode;
+    if (token) {
+        if (token.startsWith('Bearer ')) {
+            // Remove Bearer from string
+            token = token.slice(7, token.length);
+        }
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if (err) {
+                return res.status(401).send(err);
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else {
+        return res.status(400).send("No Token Provided");
+    }
+};
+
+
 server.use("/submit/", submitLimiter);
+server.use('/submit', checkToken)
 
 server.get('/submissions', (req, res) => {
     client.connect(err => {
@@ -30,6 +56,16 @@ server.get('/submissions', (req, res) => {
             res.send(videos);
         });
     });
+})
+
+server.get('/tracking', (req, res) =>{
+    let token = jwt.sign({ message: "nice try" },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: '10s' // expires in 24 hours
+        }
+    )
+    res.status(400).send({message: 'Could not track user. Adblock detected',code: token});
 })
 
 .post('/submit', (req, res) => {
