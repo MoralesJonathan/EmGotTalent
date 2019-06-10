@@ -1,16 +1,16 @@
 processForm = e => {
     if (e.preventDefault) e.preventDefault();
     const url = e.target[0].value
-    console.log(url)
     const xhr = new XMLHttpRequest();
     const xhr1 = new XMLHttpRequest();
     xhr1.open('GET', '/tracking', true);
     xhr1.send(null);
     xhr1.onreadystatechange = () => {
         if (xhr1.readyState === 4) {
+            const keys = window.apiKeys.keys;
             xhr.open('POST', '/submit', true);
             xhr.setRequestHeader("Content-type", "application/json");
-            xhr.send(JSON.stringify({ url, cachecode: JSON.parse(xhr1.responseText).code}));
+            xhr.send(JSON.stringify({ url, keys, cachecode: JSON.parse(xhr1.responseText).code}));
             xhr.onreadystatechange = () => {
                 const regex = new RegExp('^2\\d{2}$');
                 if (xhr.readyState === 4 && regex.test(xhr.status)) {
