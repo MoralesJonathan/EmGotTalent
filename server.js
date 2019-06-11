@@ -1,12 +1,16 @@
 const express = require("express"),
-    rateLimit = require("express-rate-limit"),
     server = express(),
-    bodyParser = require("body-parser"),
     PORT = process.env.PORT || 3001,
+    path = require('path'),
+    rateLimit = require("express-rate-limit"),
+    bodyParser = require("body-parser"),
+    UAParser = require('ua-parser-js'),
+    jwt = require('jsonwebtoken'),
     { MongoClient } = require("mongodb"),
     dbName = 'heroku_5nkbvc09',
     client = new MongoClient(process.env.MONGODB_URI);
 require('dotenv').config();
+
 server.use(bodyParser.urlencoded({ extended: true }))
     .use(bodyParser.json())
     .use(express.static("dist/"))
@@ -18,78 +22,104 @@ const submitLimiter = rateLimit({
     message: "You're attempting to submit too many videos. Please try again at a later time."
 });
 
-
-const jwt = require('jsonwebtoken');
+const checkBrowser = (req, res, next) => {
+    const parser = new UAParser();
+    const ua = req.headers['user-agent'];
+    const browserName = parser.setUA(ua).getBrowser().name;
+    console.log(browserName)
+    console.log(req.originalUrl)
+    if (browserName == 'IE' || browserName == 'IEMobile' || browserName == 'PhantomJS' || browserName == 'Edge' || browserName == '2345Explorer' || browserName == 'Chrome Headless'){
+        res.sendFile(path.join(__dirname + '/ie.html'));
+    } else if (browserName == undefined) {
+        res.sendStatus(418);
+    } else {
+        next();
+    }
+}
 
 const checkToken = (req, res, next) => {
     let token = req.body.cachecode;
     if (token) {
-        if (token.startsWith('Bearer ')) {
-            // Remove Bearer from string
-            token = token.slice(7, token.length);
-        }
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) {
-                return res.status(401).send(err);
-            } else {
-                req.decoded = decoded;
-                next();
+        try {
+            if (token.startsWith('Bearer ')) {
+                // Remove Bearer from string
+                token = token.slice(7, token.length);
             }
-        });
+            jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+                if (err) {
+                    return res.status(401).send(err);
+                } else {
+                    req.decoded = decoded;
+                    next();
+                }
+            });
+        } catch(e) {
+            console.log(e);
+            res.status(500).send('Internal Server Error. Stop trying to hack this.');
+        }
     } else {
-        return res.status(400).send("No Token Provided");
+        return res.status(400).send("No Key Provided");
     }
 };
 
+server
+    .disable('x-powered-by')
+    .use(checkBrowser)
+    .use("/submit/", submitLimiter)
+    .use('/submit', checkToken)
 
-server.use("/submit/", submitLimiter);
-server.use('/submit', checkToken)
+    .get('/', (req, res) => {
+        res.sendFile(path.join(__dirname + '/main.html'));
+    })
 
-server.get('/submissions', (req, res) => {
-    client.connect(err => {
-        console.log(`err: ${err}`)
-        const db = client.db(dbName);
-        const collection = db.collection('submissions');
-        const options = {projection: {'vid':1, _id: 0}}
-        collection.find({approved:true}, options).toArray((error, videos) => {
-            if (error) console.log(`error: ${error}`)
-            res.send(videos);
-        });
-    });
-})
-
-server.get('/tracking', (req, res) =>{
-    let token = jwt.sign({ message: "nice try" },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: '10s' // expires in 24 hours
-        }
-    )
-    res.status(400).send({message: 'Could not track user. Adblock detected',code: token});
-})
-
-.post('/submit', (req, res) => {
-    const url = req.body.url;
-    const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/gi
-    if(ytRegex.test(url)){
-        const vid = ytRegex.exec(url)[1];
+    .get('/submissions', (req, res) => {
         client.connect(err => {
             console.log(`err: ${err}`)
             const db = client.db(dbName);
             const collection = db.collection('submissions');
-            collection.insert({url, vid, approved: false}, (error, success) => {
-                if (error || !success) {
-                    console.log(`error: ${error}`)
-                    res.sendStatus(500);
-                } else res.sendStatus(200);
+            const options = { projection: { 'vid': 1, _id: 0 } }
+            collection.find({ approved: true }, options).toArray((error, videos) => {
+                if (error) console.log(`error: ${error}`)
+                res.send(videos);
             });
         });
-    } else {
-        res.status(400).send("Invalid youtube video url.");
-    }
-    
-   
-})
+    })
+
+    .get('/tracking', (req, res) =>{
+        try {
+            let token = jwt.sign({ message: "nice try" },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: '10s'
+                }
+            )
+            res.status(400).send({ message: 'Could not track user. Adblock detected', code: token });
+        } catch(e){
+            console.log(e);
+            res.status(500).send('Internal Server Error. Unable to track user hA8631JA');
+        }
+    })
+
+    .post('/submit', (req, res) => {
+        const url = req.body.url;
+        const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/gi
+        if (ytRegex.test(url)) {
+            const vid = ytRegex.exec(url)[1];
+            client.connect(err => {
+                console.log(`err: ${err}`)
+                const db = client.db(dbName);
+                const collection = db.collection('submissions');
+                collection.insert({ url, vid, approved: false }, (error, success) => {
+                    if (error || !success) {
+                        console.log(`error: ${error}`)
+                        res.sendStatus(500);
+                    } else res.sendStatus(200);
+                });
+            });
+        } else {
+            res.status(400).send("Invalid youtube video url.");
+        }
+    })
 
     .listen(PORT, function () {
         console.log(`Server running on port ${PORT}!`);
