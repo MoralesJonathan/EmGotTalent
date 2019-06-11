@@ -2,6 +2,7 @@ const express = require("express"),
     server = express(),
     PORT = process.env.PORT || 3001,
     path = require('path'),
+    expressip = require('express-ip');
     rateLimit = require("express-rate-limit"),
     bodyParser = require("body-parser"),
     UAParser = require('ua-parser-js'),
@@ -41,10 +42,6 @@ const checkToken = (req, res, next) => {
     let token = req.body.cachecode;
     if (token) {
         try {
-            if (token.startsWith('Bearer ')) {
-                // Remove Bearer from string
-                token = token.slice(7, token.length);
-            }
             jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
                 if (err) {
                     return res.status(401).send(err);
@@ -65,6 +62,7 @@ const checkToken = (req, res, next) => {
 server
     .disable('x-powered-by')
     .use(checkBrowser)
+    .use(expressip().getIpInfoMiddleware)
     .use("/submit/", submitLimiter)
     .use('/submit', checkToken)
 
@@ -119,6 +117,18 @@ server
         } else {
             res.status(400).send("Invalid youtube video url.");
         }
+    })
+
+    .get('/egg', (req,res)=> {
+        client.connect(err => {
+            console.log(`err: ${err}`)
+            const db = client.db(dbName);
+            const collection = db.collection('easterEgg');
+            collection.insertOne({ ip: req.ipInfo },(error, success) => {
+                if (error) console.log(`error: ${error}`)
+                res.sendStatus(200);
+            });
+        });
     })
 
     .listen(PORT, function () {
