@@ -102,7 +102,8 @@ server
         const url = req.body.url;
         const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/gi
         if (ytRegex.test(url)) {
-            const vid = ytRegex.exec(url)[1];
+            const videoUrl = ytRegex.exec(url)
+            const vid = videoUrl[1];
             client.connect(err => {
                 console.log(`err: ${err}`)
                 const db = client.db(dbName);
