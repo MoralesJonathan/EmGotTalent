@@ -100,9 +100,9 @@ server
 
     .post('/submit', (req, res) => {
         const url = req.body.url;
-        const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/gi
+        const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9,\-]+)$/gi
         if (ytRegex.test(url)) {
-            const videoUrl = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/i.exec(url);
+            const videoUrl = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9,\-]+)$/i.exec(url);
             const vid = videoUrl[1];
             client.connect(err => {
                 console.log(`err: ${err}`)
