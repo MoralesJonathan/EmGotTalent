@@ -174,8 +174,10 @@ section a:active {
   .btn {
     width: 100%;
   }
+  .col {
+    width: 100%;
+  }
 }
-
 
 @keyframes pulse {
   0% {

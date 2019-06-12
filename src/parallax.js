@@ -3,7 +3,6 @@ const width = Math.max(document.documentElement.clientWidth, window.innerWidth);
 let parallaxInstance = window.mobilecheck || width < 1000 ? null : new Parallax(scene);
 const centerParallaxElements = () => {
     const windowWidth = window.innerWidth;
-    console.log(windowWidth)
     const windowHeight = window.innerHeight;
     let offset = 0;
     const parallax = document.getElementById('parallax');
