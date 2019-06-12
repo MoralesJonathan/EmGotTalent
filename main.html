@@ -26,8 +26,9 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>EM's Got Talent '19</title>
+	<link href='loader.css' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
 	<link href='hero.css' rel='stylesheet' type='text/css'>
@@ -38,6 +39,44 @@
 </head>
 
 <body>
+	<div id="loader-wrapper">
+		<div id="loader">
+				<div class="loading-container">
+						<div class="sun-container">
+						  <div class="sun">
+							 <div class="bars">
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							  <div class="bar"></div>
+							</div>
+						  </div>
+						  <div class="airplane">
+							<img src="airplane.png"/>
+						  </div>
+						</div>
+						<div class="text">
+						  <span>Loading EGT...</span>
+						</div>
+					  </div>
+		</div>
+	</div>
 	<hero>
 		<nav>
 			<ul>
@@ -73,7 +112,7 @@
 			<div class="grid-line"></div>
 		</section>
 		<div id="parallax">
-			<img class="svg" src="triangle.svg" data-depth="0.1">
+			<img id="svg" class="svg" src="triangle.svg" data-depth="0.1">
 			<div id='title' data-depth="0.2">
 				<p class="pinkTitle">
 					2019

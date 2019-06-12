@@ -16,22 +16,6 @@ img.svg {
   margin-top: 70px;
 }
 
-@media only screen and (max-width: 1000px) {
-  img.svg {
-    width: 100%;
-    height: initial;
-  }
-  #parallax {
-    top: 40%!important;
-    position: absolute!important;
-    transform: translatey(-50%);
-    -webkit-transform: translatey(-50%);
-    -moz-transform: translatey(-50%);
-    -ms-transform: translatey(-50%);
-    -o-transform: translatey(-50%);
-  }
-}
-
 #title {
   position: absolute;
   top: 35%!important;
@@ -177,11 +161,6 @@ img.svg {
   -webkit-animation: .1s linear infinite alternate pulseGlow;
 }
 
-@media only screen and (max-width: 1000px) {
-  .horizon:before {
-    bottom: -1%;
-  }
-}
 
 .grid-line {
   height: 100%;
@@ -319,5 +298,25 @@ img.svg {
   }
   100% {
     box-shadow: 0px 0px 25px 10px rgb(255, 184, 255);
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .horizon:before {
+    bottom: -1%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  img.svg {
+    width: 100%;
+    height: initial;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #title p.wordArt, #title p.pinkTitle {
+    font-size: 11vw;
   }
 }
