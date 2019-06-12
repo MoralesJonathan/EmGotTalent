@@ -102,13 +102,13 @@ server
         const url = req.body.url;
         const ytRegex = /^https?:\/\/(?:www\.)?youtu.?be(?:.com)?\/(?:watch\?v=)?([a-z,A-Z,0-9]+)$/gi
         if (ytRegex.test(url)) {
-            const videoUrl = ytRegex.exec(url)
-            const vid = videoUrl[1];
+            // const videoUrl = ytRegex.exec(url)
+            // const vid = videoUrl[1];
             client.connect(err => {
                 console.log(`err: ${err}`)
                 const db = client.db(dbName);
                 const collection = db.collection('submissions');
-                collection.insert({ url, vid, approved: false }, (error, success) => {
+                collection.insert({ url, vid:'null', approved: false }, (error, success) => {
                     if (error || !success) {
                         console.log(`error: ${error}`)
                         res.sendStatus(500);
